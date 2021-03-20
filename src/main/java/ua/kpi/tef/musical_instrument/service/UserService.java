@@ -5,14 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ua.kpi.tef.musical_instrument.model.User;
-import ua.kpi.tef.musical_instrument.model.enums.RoleType;
+import ua.kpi.tef.musical_instrument.pojo.User;
+import ua.kpi.tef.musical_instrument.pojo.enums.RoleType;
 import ua.kpi.tef.musical_instrument.repository.UserRepository;
 
 import java.util.List;
 
 
-@Slf4j
 @Service
 public class UserService {
 
@@ -24,25 +23,20 @@ public class UserService {
     }
 
 
-        private User createUser(User user) {
-            return User.builder()
-                    .firstName(user.getFirstName())
-                    .lastName(user.getLastName())
-                    .username(user.getUsername())
-                    .email(user.getEmail())
-                    .password(new BCryptPasswordEncoder().encode(user.getPassword()))
-                    //.balance(1000)
-                    .role(RoleType.ROLE_USER)
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
-                    .build();
-        }
+    private User createUser(User user) {
+        return User.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .password(new BCryptPasswordEncoder().encode(user.getPassword()))
+                .role(RoleType.ROLE_USER)
+                .build();
+    }
 
     public User findUserById(Long id) {
         return userRepository
-                .findUserById(id)
+                .findUserByUserId(id)
                 .orElseThrow(() -> new UsernameNotFoundException("user with id " + id + " not found"));
     }
 

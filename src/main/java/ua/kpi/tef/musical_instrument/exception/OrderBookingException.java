@@ -1,4 +1,4 @@
-package ua.kpi.tef.musical_instrument.controller.exception;
+package ua.kpi.tef.musical_instrument.exception;
 
 public class OrderBookingException extends Exception {
     public OrderBookingException(String message) {

@@ -1,4 +1,4 @@
-package ua.kpi.tef.musical_instrument.model.enums;
+package ua.kpi.tef.musical_instrument.pojo.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

@@ -1,4 +1,4 @@
-package ua.kpi.tef.musical_instrument.controller.exception;
+package ua.kpi.tef.musical_instrument.exception;
 
 public class OrderNotFoundException extends Exception {
     public OrderNotFoundException(String message) {
