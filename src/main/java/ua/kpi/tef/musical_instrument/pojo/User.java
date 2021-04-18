@@ -1,7 +1,9 @@
 package ua.kpi.tef.musical_instrument.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ua.kpi.tef.musical_instrument.pojo.enums.RoleType;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import java.util.*;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table( name="user",
@@ -16,7 +20,8 @@ import java.util.*;
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long userId;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     private String firstName;
 
@@ -32,5 +37,5 @@ public class User{
     private RoleType role;
 
     @OneToMany(mappedBy = "user")
-    private List<Order> orders;
+    private List<Order> orders= new ArrayList<>();
 }

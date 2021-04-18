@@ -1,21 +1,27 @@
 package ua.kpi.tef.musical_instrument.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ua.kpi.tef.musical_instrument.pojo.enums.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 public class MusicalInstrument {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long instrumentId;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     private String name;
 
@@ -46,6 +52,5 @@ public class MusicalInstrument {
     private BigDecimal price;
 
     @OneToMany(mappedBy = "instrument")
-    private List<Order> orders;
-
+    private List<Order> orders = new ArrayList<>();
 }

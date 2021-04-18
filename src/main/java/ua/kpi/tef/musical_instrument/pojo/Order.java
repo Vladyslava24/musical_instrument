@@ -1,23 +1,24 @@
 package ua.kpi.tef.musical_instrument.pojo;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 import ua.kpi.tef.musical_instrument.pojo.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
 @Builder
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
-@Entity
+@Entity(name = "customer_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long orderId;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @ManyToOne
     private MusicalInstrument instrument;
@@ -27,9 +28,9 @@ public class Order {
     @ManyToOne
     private User user;
 
-    private Date orderDate;
+    private LocalDate orderDate;
 
-    private Date deliveryDate;
+    private LocalDate deliveryDate;
 
     private BigDecimal totalOrderPrice;
 

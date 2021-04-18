@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import ua.kpi.tef.musical_instrument.exception.InstrumentNotFoundException;
 import ua.kpi.tef.musical_instrument.exception.InstrumentSaveException;
 import ua.kpi.tef.musical_instrument.pojo.MusicalInstrument;
+import ua.kpi.tef.musical_instrument.pojo.enums.InstrumentSize;
+import ua.kpi.tef.musical_instrument.pojo.enums.Kind;
 import ua.kpi.tef.musical_instrument.service.MusicalInstrumentService;
 
 import java.util.List;
+
 
 @Controller
 public class MusicalInstrumentController {
@@ -49,5 +52,26 @@ public class MusicalInstrumentController {
     public void deleteInstrument(@PathVariable Long id) throws InstrumentNotFoundException {
         instrumentService.deleteMusicalInstrumentById(id);
     }
+
+    public void getSearchedInstruments(String kind, String size) {
+        try {
+            if (!kind.isEmpty()) {
+                if (kind.equals(String.valueOf(Kind.STRINGS)) || kind.equals(String.valueOf(Kind.KEYBOARDS)))
+                    instrumentService.getSearchedInstrumentsByKind(kind);
+                else {
+                    throw new InstrumentNotFoundException("Kind of instrument is wrong");
+                }
+            } else if (!size.isEmpty()) {
+                if (size.equals(String.valueOf(InstrumentSize.SMALL)) || size.equals(String.valueOf(InstrumentSize.MEDIUM)))
+                    instrumentService.getSearchedInstrumentsBySize(size);
+                else {
+                    throw new InstrumentNotFoundException("Size of instrument is wrong");
+                }
+            }
+        } catch (InstrumentNotFoundException e) {
+            e.getMessage();
+        }
+    }
+
 }
 

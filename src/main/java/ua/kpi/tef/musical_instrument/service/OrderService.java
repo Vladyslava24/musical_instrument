@@ -29,10 +29,10 @@ public class OrderService {
 
     public void makeOrder(Order order, MusicalInstrument instrument, User user) throws OrderBookingException,
             UserNotFoundException, InstrumentNotFoundException {
-        User userToSave = userRepository.findById(user.getUserId())
-                .orElseThrow(()->new UserNotFoundException("no user with id=" + user.getUserId()));
-        MusicalInstrument instrumentToSave = instrumentRepository.findById(instrument.getInstrumentId())
-                .orElseThrow(()->new InstrumentNotFoundException("no instrument with id=" + instrument.getInstrumentId()));
+        User userToSave = userRepository.findById(user.getId())
+                .orElseThrow(()->new UserNotFoundException("no user with id=" + user.getId()));
+        MusicalInstrument instrumentToSave = instrumentRepository.findById(instrument.getId())
+                .orElseThrow(()->new InstrumentNotFoundException("no instrument with id=" + instrument.getId()));
         order.saveOrder(instrumentToSave);
         if(userToSave != null) {
             order.saveOrder(userToSave);
@@ -43,8 +43,8 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public List<Order> findAllUserOrders(Long userId) {
-        return orderRepository.findOrderByUser(userId).stream()
+    public List<Order> findAllUserOrders(User user) {
+        return orderRepository.findOrderByUser(user).stream()
                 .collect(Collectors.toList());
     }
 }

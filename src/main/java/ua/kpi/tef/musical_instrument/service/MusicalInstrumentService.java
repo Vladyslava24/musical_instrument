@@ -26,7 +26,7 @@ public class MusicalInstrumentService {
         try {
             instrumentRepository.save(instrument);
         }catch (DataIntegrityViolationException e) {
-            throw new InstrumentSaveException("Can not instrument with  id=" + instrument.getInstrumentId());
+            throw new InstrumentSaveException("Can not instrument with  id=" + instrument.getId());
         }
     }
 
@@ -46,9 +46,21 @@ public class MusicalInstrumentService {
     }
 
     public void deleteMusicalInstrumentById(Long instrumentId) throws InstrumentNotFoundException {
-        MusicalInstrument instrument = instrumentRepository.findMusicalInstrumentByInstrumentId(instrumentId).orElseThrow(()
+        MusicalInstrument instrument = instrumentRepository.findMusicalInstrumentById(instrumentId).orElseThrow(()
                 -> new InstrumentNotFoundException("instrument" + instrumentId + " not found"));
         instrumentRepository.delete(instrument);
         log.info("deleting instrument");
+    }
+
+    public List<MusicalInstrument> getSearchedInstrumentsByKind(String kind) {
+        return instrumentRepository.findAll().stream()
+                .filter(p->p.getKind().toString().equals(kind))
+                .collect(Collectors.toList());
+    }
+
+    public List<MusicalInstrument> getSearchedInstrumentsBySize(String size) {
+        return instrumentRepository.findAll().stream()
+                .filter(p->p.getKind().toString().equals(size))
+                .collect(Collectors.toList());
     }
 }

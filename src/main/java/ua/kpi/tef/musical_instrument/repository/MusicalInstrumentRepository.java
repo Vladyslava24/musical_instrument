@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface MusicalInstrumentRepository extends JpaRepository<MusicalInstrument, Long> {
-    Optional<MusicalInstrument> findMusicalInstrumentByInstrumentId(Long id);
+    Optional<MusicalInstrument> findMusicalInstrumentById(Long id);
 }

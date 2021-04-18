@@ -36,7 +36,7 @@ public class UserService {
 
     public User findUserById(Long id) {
         return userRepository
-                .findUserByUserId(id)
+                .findUserById(id)
                 .orElseThrow(() -> new UsernameNotFoundException("user with id " + id + " not found"));
     }
 

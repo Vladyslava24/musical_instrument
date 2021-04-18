@@ -15,6 +15,7 @@ import ua.kpi.tef.musical_instrument.pojo.User;
 import ua.kpi.tef.musical_instrument.service.MusicalInstrumentService;
 import ua.kpi.tef.musical_instrument.service.OrderService;
 
+
 @Controller
 public class OrderController {
     private final OrderService orderService;
@@ -33,6 +34,6 @@ public class OrderController {
     }
 
     public void findAllUserOrders(User user){
-         orderService.findAllUserOrders(user.getUserId());
+         orderService.findAllUserOrders(user);
     }
 }
