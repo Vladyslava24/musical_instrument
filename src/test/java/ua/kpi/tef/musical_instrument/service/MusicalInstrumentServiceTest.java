@@ -122,7 +122,7 @@ public class MusicalInstrumentServiceTest {
                 AvailableStatus.IN_STOCK, 12L, BigDecimal.TEN));
         assertEquals(3, instrumentList1.size());
         Mockito.doReturn(instrumentList1).when(instrumentRepository).findAll();
-        List<MusicalInstrument> searchedList = instrumentService.getSearchedInstrumentsBySize(String.valueOf(InstrumentSize.BIG));
+        List<MusicalInstrument> searchedList = instrumentService.getSearchedInstrumentsBySize(InstrumentSize.BIG);
         //assertEquals(1, searchedList.size());
         //assertEquals(1L, searchedList.get(0).getId());
         //assertEquals(3L, searchedList.get(1).getId());
