@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import ua.kpi.tef.musical_instrument.exception.InstrumentNotFoundException;
 import ua.kpi.tef.musical_instrument.exception.InstrumentSaveException;
 import ua.kpi.tef.musical_instrument.pojo.MusicalInstrument;
+import ua.kpi.tef.musical_instrument.pojo.enums.InstrumentSize;
+import ua.kpi.tef.musical_instrument.pojo.enums.Kind;
 import ua.kpi.tef.musical_instrument.repository.MusicalInstrumentRepository;
 
 import java.util.List;
@@ -40,9 +42,10 @@ public class MusicalInstrumentService {
                 .collect(Collectors.toList());
     }
 
-    public void editMusicalInstrument(MusicalInstrument instrument){
+    public MusicalInstrument editMusicalInstrument(MusicalInstrument instrument){
         instrumentRepository.save(instrument);
         log.info("editing musical instrument instrument");
+        return instrument;
     }
 
     public void deleteMusicalInstrumentById(Long instrumentId) throws InstrumentNotFoundException {
@@ -52,15 +55,17 @@ public class MusicalInstrumentService {
         log.info("deleting instrument");
     }
 
-    public List<MusicalInstrument> getSearchedInstrumentsByKind(String kind) {
-        return instrumentRepository.findAll().stream()
+    public List<MusicalInstrument> getSearchedInstrumentsByKind(Kind kind) {
+        /*return instrumentRepository.findAll().stream()
                 .filter(p->p.getKind().toString().equals(kind))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
+        return instrumentRepository.findMusicalInstrumentByKind(kind);
     }
 
-    public List<MusicalInstrument> getSearchedInstrumentsBySize(String size) {
-        return instrumentRepository.findAll().stream()
+    public List<MusicalInstrument> getSearchedInstrumentsBySize(InstrumentSize size) {
+        /*return instrumentRepository.findAll().stream()
                 .filter(p->p.getKind().toString().equals(size))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
+        return instrumentRepository.findMusicalInstrumentByInstrumentSize(size);
     }
 }

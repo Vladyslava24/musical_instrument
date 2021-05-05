@@ -27,50 +27,42 @@ public class MusicalInstrumentController {
         return instrumentService.getAllMusicalInstrument();
     }
 
-    public void saveNewMusicalInstrument(MusicalInstrument instrument) throws InstrumentSaveException {
+    public MusicalInstrument saveNewMusicalInstrument(MusicalInstrument instrument) {
         try {
             instrumentService.createNewMusicalInstrument(instrument);
         } catch (InstrumentSaveException e){
             e.getMessage();
         }
-
+        return instrument;
     }
 
-    public void editMusicalInstrument(Long id) throws InstrumentNotFoundException {
+    public MusicalInstrument getMusicalInstrumentById(Long id) throws InstrumentNotFoundException {
         try {
             instrumentService.getMusicalInstrumentById(id);
         } catch (InstrumentNotFoundException e){
             e.getMessage();
         }
+        return instrumentService.getMusicalInstrumentById(id);
     }
 
-    public void editNewInstrument(Long id, MusicalInstrument instrument) {
-        instrumentService.editMusicalInstrument(instrument);
+    public MusicalInstrument editNewInstrument(MusicalInstrument instrument) {
+        return instrumentService.editMusicalInstrument(instrument);
     }
 
-    //@GetMapping("delete_bowed{id}")
-    public void deleteInstrument(@PathVariable Long id) throws InstrumentNotFoundException {
-        instrumentService.deleteMusicalInstrumentById(id);
-    }
-
-    public void getSearchedInstruments(String kind, String size) {
+    public void deleteInstrument(Long id) {
         try {
-            if (!kind.isEmpty()) {
-                if (kind.equals(String.valueOf(Kind.STRINGS)) || kind.equals(String.valueOf(Kind.KEYBOARDS)))
-                    instrumentService.getSearchedInstrumentsByKind(kind);
-                else {
-                    throw new InstrumentNotFoundException("Kind of instrument is wrong");
-                }
-            } else if (!size.isEmpty()) {
-                if (size.equals(String.valueOf(InstrumentSize.SMALL)) || size.equals(String.valueOf(InstrumentSize.MEDIUM)))
-                    instrumentService.getSearchedInstrumentsBySize(size);
-                else {
-                    throw new InstrumentNotFoundException("Size of instrument is wrong");
-                }
-            }
-        } catch (InstrumentNotFoundException e) {
+            instrumentService.deleteMusicalInstrumentById(id);
+        } catch (InstrumentNotFoundException e){
             e.getMessage();
         }
+    }
+
+    public List<MusicalInstrument> getSearchedInstrumentsByKind(Kind kind) {
+        return instrumentService.getSearchedInstrumentsByKind(kind);
+    }
+
+    public List<MusicalInstrument> getSearchedInstrumentsBySize(InstrumentSize size) {
+        return instrumentService.getSearchedInstrumentsBySize(size);
     }
 
 }
