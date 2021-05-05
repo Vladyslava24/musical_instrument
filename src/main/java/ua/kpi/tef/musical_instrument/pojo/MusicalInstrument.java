@@ -53,4 +53,19 @@ public class MusicalInstrument {
 
     @OneToMany(mappedBy = "instrument")
     private List<Order> orders = new ArrayList<>();
+
+    public MusicalInstrument(Long id, String name, Kind kind, String soundSource, boolean resonatorPresence, Resonators resonators, Material instrumentMaterial, Coating coating, InstrumentSize instrumentSize, AvailableStatus availableStatus, long availableAmount, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.kind = kind;
+        this.soundSource = soundSource;
+        this.resonatorPresence = resonatorPresence;
+        this.resonators = resonators;
+        this.instrumentMaterial = instrumentMaterial;
+        this.coating = coating;
+        this.instrumentSize = instrumentSize;
+        this.availableStatus = availableStatus;
+        this.availableAmount = availableAmount;
+        this.price = price;
+    }
 }
