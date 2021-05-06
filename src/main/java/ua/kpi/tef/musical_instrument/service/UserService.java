@@ -23,7 +23,7 @@ public class UserService {
     }
 
 
-    private User createUser(User user) {
+    public User createUser(User user) {
         return User.builder()
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
