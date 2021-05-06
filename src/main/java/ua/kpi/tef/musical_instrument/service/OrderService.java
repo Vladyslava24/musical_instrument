@@ -2,6 +2,8 @@ package ua.kpi.tef.musical_instrument.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ua.kpi.tef.musical_instrument.exception.InstrumentNotFoundException;
 import ua.kpi.tef.musical_instrument.exception.OrderBookingException;
 import ua.kpi.tef.musical_instrument.exception.UserNotFoundException;
@@ -27,7 +29,9 @@ public class OrderService {
         this.instrumentRepository = instrumentRepository;
     }
 
-    public void makeOrder(Order order, MusicalInstrument instrument, User user) throws OrderBookingException,
+    @Transactional(propagation = Propagation.REQUIRES_NEW,
+            rollbackFor = OrderBookingException.class)
+    public Order makeOrder(Order order, MusicalInstrument instrument, User user) throws OrderBookingException,
             UserNotFoundException, InstrumentNotFoundException {
         User userToSave = userRepository.findById(user.getId())
                 .orElseThrow(()->new UserNotFoundException("no user with id=" + user.getId()));
@@ -41,6 +45,7 @@ public class OrderService {
         order.setTotalOrderPrice(order.getPrice());
         order.setOrderStatus(OrderStatus.RESERVED);
         orderRepository.save(order);
+        return order;
     }
 
     public List<Order> findAllUserOrders(User user) {

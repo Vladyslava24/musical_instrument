@@ -15,6 +15,8 @@ import ua.kpi.tef.musical_instrument.pojo.User;
 import ua.kpi.tef.musical_instrument.service.MusicalInstrumentService;
 import ua.kpi.tef.musical_instrument.service.OrderService;
 
+import java.util.List;
+
 
 @Controller
 public class OrderController {
@@ -25,15 +27,11 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    public void createOrder(Order newOrder, MusicalInstrument instrument, User user) {
-         try {
-             orderService.makeOrder(newOrder, instrument, user);
-         } catch (OrderBookingException | InstrumentNotFoundException | UserNotFoundException e){
-             e.getMessage();
-         }
+    public Order createOrder(Order newOrder, MusicalInstrument instrument, User user) throws UserNotFoundException, InstrumentNotFoundException, OrderBookingException {
+            return orderService.makeOrder(newOrder, instrument, user);
     }
 
-    public void findAllUserOrders(User user){
-         orderService.findAllUserOrders(user);
+    public List<Order> findAllUserOrders(User user){
+         return orderService.findAllUserOrders(user);
     }
 }
