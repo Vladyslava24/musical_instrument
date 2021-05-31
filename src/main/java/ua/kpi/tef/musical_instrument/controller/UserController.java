@@ -1,6 +1,7 @@
 package ua.kpi.tef.musical_instrument.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import ua.kpi.tef.musical_instrument.pojo.User;
 import ua.kpi.tef.musical_instrument.service.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -39,6 +41,12 @@ public class UserController {
         model.addAttribute("error", error != null);
         model.addAttribute("logout", logout != null);
         return "login";
+    }
+
+    @RequestMapping("/cab")
+    public String getUserPage(Model model, @AuthenticationPrincipal User user){
+        model.addAttribute("user", user);
+        return "cab";
     }
 
     public User updateUser(User user, String email, String lastName, String firstName, String username){

@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h2 class="page-header">Registration Form</h2>
-            <form th:action="@{/register}" method="post" th:object="${newUser}" style="margin-bottom: 30px" name="form" autocomplete="off" novalidate ng-submit="form.$valid && sendForm(auth)">
+            <form th:action="@{/register}" method="post" th:object="${newUser}" style="margin-bottom: 30px" name="form">
                     <div class="form-group">
                         <label for="exampleInputFirstName">First Name</label>
                         <input type="text"
