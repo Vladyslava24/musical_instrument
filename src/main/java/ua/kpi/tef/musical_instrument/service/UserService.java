@@ -1,7 +1,10 @@
 package ua.kpi.tef.musical_instrument.service;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,7 +16,7 @@ import java.util.List;
 
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -32,6 +35,12 @@ public class UserService {
                 .password(new BCryptPasswordEncoder().encode(user.getPassword()))
                 .role(RoleType.ROLE_USER)
                 .build();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
+        return userRepository.findUserByUsername(username).orElseThrow(()
+                -> new UsernameNotFoundException("user " + username + " not found!"));
     }
 
     public User findUserById(Long id) {

@@ -16,15 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@SpringBootApplication
+@SpringBootApplication  //(scanBasePackages = "ua.kpi.tef.musical_instrument")
 public class MusicalInstrumentApplication {
-    //private static MusicalInstrumentRepository instrumentRepository;
-
     public static void main(String[] args) {
         SpringApplication.run(MusicalInstrumentApplication.class, args);
-       // MusicalInstrumentService musicalInstrumentService = new MusicalInstrumentService(instrumentRepository);
-        //BigDecimal bigDecimal = BigDecimal.valueOf(500);
-        //List<Order> orders = new ArrayList<>();
     }
 
 }

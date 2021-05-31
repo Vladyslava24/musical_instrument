@@ -55,4 +55,14 @@ public class Order {
         }
         return BigDecimal.ZERO;
     }
+
+    public Order(MusicalInstrument instrument, int quantity, User user, LocalDate orderDate, LocalDate deliveryDate, BigDecimal totalOrderPrice, OrderStatus orderStatus) {
+        this.instrument = instrument;
+        this.quantity = quantity;
+        this.user = user;
+        this.orderDate = orderDate;
+        this.deliveryDate = deliveryDate;
+        this.totalOrderPrice = totalOrderPrice;
+        this.orderStatus = orderStatus;
+    }
 }

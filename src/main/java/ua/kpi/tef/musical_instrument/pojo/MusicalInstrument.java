@@ -68,4 +68,18 @@ public class MusicalInstrument {
         this.availableAmount = availableAmount;
         this.price = price;
     }
+
+    public MusicalInstrument(String name, Kind kind, String soundSource, boolean resonatorPresence, Resonators resonators, Material instrumentMaterial, Coating coating, InstrumentSize instrumentSize, AvailableStatus availableStatus, long availableAmount, BigDecimal price) {
+        this.name = name;
+        this.kind = kind;
+        this.soundSource = soundSource;
+        this.resonatorPresence = resonatorPresence;
+        this.resonators = resonators;
+        this.instrumentMaterial = instrumentMaterial;
+        this.coating = coating;
+        this.instrumentSize = instrumentSize;
+        this.availableStatus = availableStatus;
+        this.availableAmount = availableAmount;
+        this.price = price;
+    }
 }
