@@ -4,6 +4,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ua.kpi.tef.musical_instrument.exception.InstrumentNotFoundException;
 import ua.kpi.tef.musical_instrument.exception.UserNotFoundException;
 import ua.kpi.tef.musical_instrument.pojo.User;
 import ua.kpi.tef.musical_instrument.pojo.enums.RoleType;
@@ -41,11 +42,23 @@ public class AdminController {
         return "userlist";
     }
 
+    @GetMapping("/instrumentslist")
+    public String findAllInstruments(Model model){
+        model.addAttribute("instruments", instrumentService.getAllMusicalInstrument());
+        return "instrumentslist";
+    }
+
 
     @GetMapping("delete_user{id}")
-    public String deleteById(@PathVariable Long id){
+    public String deleteUserById(@PathVariable Long id){
         userService.deleteById(id);
         return "redirect:/userslist";
+    }
+
+    @GetMapping("delete_instrument{id}")
+    public String deleteInstrumentById(@PathVariable Long id) throws InstrumentNotFoundException {
+        instrumentService.deleteMusicalInstrumentById(id);
+        return "redirect:/instrumentslist";
     }
 
     @GetMapping("edit_user{id}")

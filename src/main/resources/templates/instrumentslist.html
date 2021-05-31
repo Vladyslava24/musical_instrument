@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Instrument List Page</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/headers/">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Kind</th>
+        <th scope="col">Sound Source</th>
+        <th scope="col">Resonator Presence</th>
+        <th scope="col">Resonators</th>
+        <th scope="col">Material</th>
+        <th scope="col">Coating</th>
+        <th scope="col">Size</th>
+        <th scope="col">Status</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Price</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="instrument : ${instruments}">
+        <th scope="row" th:text="${instrument.id}"></th>
+        <td th:text="${instrument.name}"></td>
+        <td th:text="${instrument.kind}"></td>
+        <td th:text="${instrument.soundSource}"></td>
+        <td th:text="${instrument.resonatorPresence}"></td>
+        <td th:text="${instrument.resonators}"></td>
+        <td th:text="${instrument.instrumentMaterial}"></td>
+        <td th:text="${instrument.coating}"></td>
+        <td th:text="${instrument.instrumentSize}"></td>
+        <td th:text="${instrument.availableStatus}"></td>
+        <td th:text="${instrument.availableAmount}"></td>
+        <td th:text="${instrument.price}"></td>
+        <td><a th:href="@{/delete_instrument{id}(id=${instrument.id})}"  class="btn btn-outline-secondary btn-lg px-4">Delete</a></td>
+        <td><a th:href="@{/edit_instrument{id}(id=${instrument.id})}"  class="btn btn-outline-secondary btn-lg px-4">Edit</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
