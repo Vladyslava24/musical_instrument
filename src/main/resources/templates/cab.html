@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Cab</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Personal cabinet</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/headers/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
+
+<meta name="theme-color" content="#7952b3">
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <form method="post" th:action="@{/find-all}">
+                <li class="nav-item">
+                    <button type="submit" class="nav-link">All instruments</button>
+                </li>
+            </form>
+            <li class="nav-item"><a href="/all-orders" class="nav-link">Orders</a></li>
+        </ul>
+    </header>
 <body>
-This is personal cabinet
+<form method="post" th:action="@{/find-by-kind}">
+    <select class="form-select" aria-label="Default select example" name="kind">
+        Select Kind
+        <option value="KEYBOARDS">KEYBOARDS</option>
+        <option value="STRINGS">STRINGS</option>
+        <option value="PERCUSSION">PERCUSSION</option>
+        <option value="WIND">WIND</option>
+        <option value="REED">REED</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<form method="post" th:action="@{/find-by-size}">
+    <select class="form-select" aria-label="Default select example" name="instrumentSize">
+        Select Instrument Size
+        <option value="SMALL">SMALL</option>
+        <option value="MEDIUM">MEDIUM</option>
+        <option value="BIG">BIG</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </body>
 </html>

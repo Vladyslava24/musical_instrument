@@ -57,12 +57,24 @@ public class MusicalInstrumentController {
         }
     }
 
-    public List<MusicalInstrument> getSearchedInstrumentsByKind(Kind kind) {
-        return instrumentService.getSearchedInstrumentsByKind(kind);
+    @PostMapping("find-all")
+    public String getAllInstruments(Model model) {
+        model.addAttribute("instruments", instrumentService.getAllMusicalInstrument());
+        return "searchedlist";
     }
 
-    public List<MusicalInstrument> getSearchedInstrumentsBySize(InstrumentSize size) {
-        return instrumentService.getSearchedInstrumentsBySize(size);
+    @PostMapping("find-by-kind")
+    public String getSearchedInstrumentsByKind(Model model, @RequestParam String kind) {
+        Kind searchedKind = Kind.valueOf(kind);
+        model.addAttribute("instruments", instrumentService.getSearchedInstrumentsByKind(searchedKind));
+        return "searchedlist";
+    }
+
+    @PostMapping("find-by-size")
+    public String getSearchedInstrumentsBySize(Model model, @RequestParam String instrumentSize) {
+        InstrumentSize searchedSize = InstrumentSize.valueOf(instrumentSize);
+        model.addAttribute("instruments",instrumentService.getSearchedInstrumentsBySize(searchedSize));
+        return "searchedlist";
     }
 
 }
