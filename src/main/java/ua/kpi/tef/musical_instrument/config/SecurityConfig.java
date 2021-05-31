@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers( "/", "/find_all_instrument", "/find_instrument{id}",
-                        "/ui/registr").permitAll()
+                        "/register","/js/*.js", "/reg").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
