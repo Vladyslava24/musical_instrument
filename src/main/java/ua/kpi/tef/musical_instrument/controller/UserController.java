@@ -49,8 +49,8 @@ public class UserController {
         return "cab";
     }
 
-    public User updateUser(User user, String email, String lastName, String firstName, String username){
-        userService.updateUser(user, email, lastName, firstName, username);
+    public User updateUser(User user, String email, String lastName, String firstName, String username, String role){
+        userService.updateUser(user, email, lastName, firstName, username, role);
         return user;
     }
 

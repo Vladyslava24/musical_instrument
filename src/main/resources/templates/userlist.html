@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Admin Page</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/headers/">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Username</th>
+        <th scope="col">Password</th>
+        <th scope="col">Role</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="user : ${users}">
+            <th scope="row" th:text="${user.id}"></th>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.role}"></td>
+            <td><a th:href="@{/delete_user{id}(id=${user.id})}"  class="btn btn-outline-secondary btn-lg px-4">Delete</a></td>
+            <td><a th:href="@{/edit_user{id}(id=${user.id})}"  class="btn btn-outline-secondary btn-lg px-4">Edit</a></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

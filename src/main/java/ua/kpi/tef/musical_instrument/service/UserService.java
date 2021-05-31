@@ -57,11 +57,12 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public void updateUser(User user, String email, String lastName, String firstName, String username){
+    public void updateUser(User user, String email, String lastName, String firstName, String username, String role){
         user.setEmail(email);
         user.setLastName(lastName);
         user.setFirstName(firstName);
         user.setUsername(username);
+        user.setRole(RoleType.valueOf(role));
         userRepository.save(user);
     }
 

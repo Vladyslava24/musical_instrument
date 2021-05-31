@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Edit User Page</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/headers/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <form method="post" th:object="${editUser}" th:action="@{/edit_user{id}(id=${userId})}">
+        <div class="mb-3">
+            <label for="exampleInputFirstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="exampleInputFirstName" aria-describedby="emailHelp"
+                   th:field="*{firstName}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputLastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="exampleInputLastName" aria-describedby="emailHelp"
+                   th:field="*{lastName}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                   th:field="*{email}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="exampleInputUsername" aria-describedby="emailHelp"
+                   th:field="*{username}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword"
+                   th:field="*{password}">
+        </div>
+        <select class="form-select" aria-label="Default select example" th:field="*{role}">
+            Role Type
+            <option value="ROLE_USER">USER</option>
+            <option value="ROLE_ADMIN">ADMIN</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+</html>
