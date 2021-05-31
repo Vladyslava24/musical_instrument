@@ -3,15 +3,19 @@ package ua.kpi.tef.musical_instrument.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.kpi.tef.musical_instrument.exception.InstrumentNotFoundException;
+import ua.kpi.tef.musical_instrument.exception.InstrumentSaveException;
 import ua.kpi.tef.musical_instrument.exception.UserNotFoundException;
+import ua.kpi.tef.musical_instrument.pojo.MusicalInstrument;
 import ua.kpi.tef.musical_instrument.pojo.User;
 import ua.kpi.tef.musical_instrument.pojo.enums.RoleType;
 import ua.kpi.tef.musical_instrument.service.MusicalInstrumentService;
 import ua.kpi.tef.musical_instrument.service.OrderService;
 import ua.kpi.tef.musical_instrument.service.UserService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -80,4 +84,45 @@ public class AdminController {
         userService.updateUser(user, firstName, lastName, email, username, role);
         return "redirect:/userslist";
     }
+
+    @GetMapping("create-instrument")
+    public String getAdminHotelPage(Model model){
+        model.addAttribute("newInstrument", MusicalInstrument.builder().build());
+        return "create_instrument";
+    }
+
+    @PostMapping("create-instrument")
+    public String createNewInstrument(Model model, @ModelAttribute("newInstrument") MusicalInstrument instrument,
+                              @RequestParam("availableAmount") String availableAmount,
+                              @RequestParam("price") String price,
+                              BindingResult bindingResult) throws InstrumentSaveException {
+        Long amount = Long.valueOf(availableAmount);
+        BigDecimal newPrice = BigDecimal.valueOf(Long.parseLong(price));
+        instrument.setAvailableAmount(amount);
+        instrument.setPrice(newPrice);
+        instrumentService.createNewMusicalInstrument(instrument);
+        return "redirect:/instrumentslist";
+    }
+
+    @GetMapping("edit_instrument{id}")
+    public String getEditInstrumentPage(Model model, @PathVariable Long id) throws InstrumentNotFoundException {
+        MusicalInstrument instrument = instrumentService.getMusicalInstrumentById(id);
+        model.addAttribute("editInstrument", instrument);
+        model.addAttribute("instrumentId", id);
+        return "edit_instrument";
+    }
+
+    @PostMapping("edit_instrument{id}")
+    public String editInstrument(@PathVariable Long id,
+                           @ModelAttribute("editInstrument") MusicalInstrument instrument,
+                           @RequestParam("availableAmount") String availableAmount,
+                           @RequestParam("price") String price) {
+        long amount = Long.parseLong(availableAmount);
+        BigDecimal newPrice = BigDecimal.valueOf(Long.parseLong(price));
+        instrument.setAvailableAmount(amount);
+        instrument.setPrice(newPrice);
+        instrumentService.editMusicalInstrument(instrument);
+        return "redirect:/instrumentslist";
+    }
+
 }

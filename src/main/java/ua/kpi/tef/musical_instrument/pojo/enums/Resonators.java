@@ -11,6 +11,9 @@ public enum Resonators {
     private ResonatorsAmount resonatorsAmount;
     private ResonatorsLength resonatorsLength;
 
+    Resonators() {
+    }
+
     Resonators(ResonatorsAmount resonatorsAmount) {
         this.resonatorsAmount = resonatorsAmount;
     }

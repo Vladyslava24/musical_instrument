@@ -9,6 +9,9 @@ public enum Material {
     private String additionalMaterial;
     private String coating;
 
+    Material() {
+    }
+
     Material(String additionalMaterial, String coating) {
         this.additionalMaterial = additionalMaterial;
         this.coating = coating;
@@ -22,10 +25,5 @@ public enum Material {
         return coating;
     }
 
-    @Override
-    public String toString() {
-        return " additional material: " + additionalMaterial +
-                ", coating: " + coating;
-    }
 }
 
